@@ -1,0 +1,38 @@
+Some Conditions are given here with solution Queries to retrive the data from the tables we have created.
+
+
+/*1.	Select customers who have not borrowed any book from library*/
+
+select customer.custID,concat(customer.fname,'  ',customer.lname) as name from customer 
+left join Transaction
+ on customer.custID=Transaction.custID where transID is null;
+
+/*2.	Select book with highest page count*/
+
+select bkID, title from book where pagecount in (select max(pageCount) from book);
+
+/*3.	Select customer who has borrowed some book for longest period*/
+
+select customer.custID, concat(customer.fname,'  ',customer.lname) as name from customer join transaction 
+on customer.custID=transaction.custID where datediff(transaction.return_date,transaction.issue_date) in 
+(select max(datediff(transaction.return_date,transaction.issue_date)) from transaction);
+
+select custid ,concat(fname,'  ',lname) as name from customer where 
+custid=(select custid from transaction where datediff(return_date,issue_date) in (select max(datediff(return_date,issue_date))from transaction));
+
+/*	JOINS:
+1.	Display list of all books along with their authors*/
+
+select book.bkID,book.title,concat(author.fname,'  ',author.lname) as author from book join author on author.authorid=book.authorid;
+
+
+/*2.	Display list of top 20 most borrowed books*/
+
+select transaction.bkid ,book.title ,count(transaction.bkid) as times_borrowed from transaction join book on book.bkid=transaction.bkid 
+group by bkid order by count(transaction.bkid) desc limit 20;
+
+/*3.	Display list of top 10 customers who have borrowed most books*/
+
+select transaction.custid,concat(customer.fname,'  ',customer.lname) as customername, count(transaction.custid) as books_borrowed
+ from transaction join customer on customer.custid=transaction.custid
+ group by custid order by count(transaction.custid) desc limit 10;
