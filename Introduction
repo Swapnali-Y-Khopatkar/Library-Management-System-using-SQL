@@ -1,0 +1,20 @@
+Introduction of the Project!
+
+1.	Description:
+Following database schema is designed to function as a backend storage database for a web application built to manage a library.
+
+By storing information in a relational database, all the tasks related to daily functioning of the library can be performed easily and much more efficiently. 
+Some of the benefits of using this system to store data over traditional paper registers are as follows:
+
+1.	Updating and modifying booklist in the library is much easier and efficient
+2.	Maintaining customer details and their account is easy and efficient.
+3.	Calculations like due payments can be done automatically by DBMS, thus eliminating human error
+4.	RDBMS provides many ways to analyze available data, 
+thus helping in making more informed decisions about inventory management and other aspects of library management
+
+This database contains 5 tables:
+1.	Author
+2.	Type (Genre of book)
+3.	Book
+4.	Customer
+5.	Transaction
